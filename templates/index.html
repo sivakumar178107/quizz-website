@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<head>
+<title>online exam</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#but1").click(function(){
+            $(".rb").show();
+            $(".rb").attr("disabled",true);
+        })
+    })
+    function getanswers()
+    {
+        document.getElementById("usersAnswers").innerHTML="";
+        var e=document.getElementsByTagName('input');
+        for(i=0;i<e.length;i++){
+            if(e[i].type="radio"){
+                if(e[i].checked){
+                    document.getElementById("usersAnswers").innerHTML+="Q"+e[i].name+"the answer you selected is:"+e[i].value+"<br/>";
+                }
+            }
+        }
+    }
+</script>
+ </head>
+ <body>
+     <center>
+         <h1>create dynamically quiz</h1>
+         <h1>python javascript</h1>
+         </center>
+         <div style="padding-left: 30px;">
+           {% for results in exam %}
+             <table>
+                 <tr>
+                     <td>{{results.id}}{{results.question}} </td>
+                 </tr>
+                 <tr>
+                     <td><input type="radio" id="option1" class="rb" name="{{results.id}}" value="{{results.option1}}">{{results.option1}}</td>
+                 </tr>
+                 <tr>
+                    <td><input type="radio" id="option2" class="rb" name="{{results.id}}" value="{{results.option2}}">{{results.option2}}</td>
+                </tr>
+                <tr>
+                    <td><input type="radio" id="option3" class="rb" name="{{results.id}}" value="{{results.option3}}">{{results.option3}}</td>
+                </tr>
+                <tr>
+                    <td><input type="radio" id="option4"class="rb"  name="{{results.id}}" value="{{results.option4}}">{{results.option4}}</td>
+                </tr>
+                <tr>
+                    <td><label id="corrans" class="rb" style="display: none;color: green;"><b>the correct answer is {{results.corrans}}</b></label></td>
+                </tr>
+                </table>
+         {% endfor %}
+         <br/>
+         <input type="submit" value="Click For Results" id="but1"onclick="getanswers();"/>
+            </hr>
+         <b id="usersAnswers"></b>
+         </div>
+ </body>
+</html>
